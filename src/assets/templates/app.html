@@ -1,8 +1,8 @@
 <table>
     <th>Budget Table</th>
     <tbody>
-        <tr> *ngFor="#bi of budget_items">
-            <td>{{ bi.amount }}</td>
+        <tr *ngFor="#bi of budget_items">
+            <td>{{ bi.sum }}</td>
             <td>{{ bi.description }}</td>
         </tr>
     </tbody>

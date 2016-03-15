@@ -14,7 +14,7 @@ import {BudgetService} from './services/budget.service';
     pipes: [ ],
     providers: [BudgetService],
     directives: [ ],
-    templateUrl: require('./templates/app.html')
+    templateUrl: '/assets/templates/app.html'
  })
  export class App implements OnInit {
 
