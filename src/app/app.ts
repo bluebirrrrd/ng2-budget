@@ -2,6 +2,7 @@
  * Angular 2 decorators and services
  */
 import {Component, OnInit} from 'angular2/core';
+import {NgForm, FORM_DIRECTIVES} from 'angular2/common';
 
 import {BudgetItem} from './budget/budget-item';
 import {BudgetService} from './services/budget.service';
@@ -13,25 +14,34 @@ import {BudgetService} from './services/budget.service';
     selector: 'app',
     pipes: [ ],
     providers: [BudgetService],
-    directives: [ ],
+    directives: [FORM_DIRECTIVES],
     templateUrl: '/assets/templates/app.html'
  })
  export class App implements OnInit {
 
     public budget_items: BudgetItem[];
+    public model: BudgetItem = new BudgetItem(0, "");
 
     constructor(private _budgetService: BudgetService) {
     }
 
     ngOnInit() {
+        this.getItems();
+    }
+
+    getItems() {
         this.budget_items = this._budgetService.getItems();
     }
- }
 
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */
+    addItem(model: BudgetItem) {
+        console.log("you just submitted:");
+        console.log(model);
+        this._budgetService.addItem(model);
+        this.getItems();
+    }
+
+    fillWithTestData() {
+        this._budgetService.fillWithTestData();
+        this.getItems();
+    }
+ }
