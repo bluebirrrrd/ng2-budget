@@ -2,20 +2,39 @@ import {BudgetItem} from '../budget/budget-item';
 
 export class BudgetService {
     
-    private _budgetItems: BudgetItem[];
-    
     getItems() {
-        this._budgetItems = budgetItems;
-        return this._budgetItems;
+
+        var budgetItems: BudgetItem[];
+
+        if (localStorage.budgetItems) {
+            budgetItems = JSON.parse(localStorage.budgetItems) || [];
+        } else {
+            budgetItems = [];
+        }
+
+        return budgetItems;
     }
 
-    addItem(new_sum: number, new_description: string) {
-        var item: BudgetItem = {
-            sum: new_sum,
-            description: new_description
-        }
-        this._budgetItems.push(item);
+
+    addItem(item: BudgetItem) {
+        
+        var allItems: BudgetItem[];
+
+        try {
+            allItems = localStorage.budgetItems ? JSON.parse(localStorage.budgetItems) : [];
+        } catch(e) {
+            allItems = [];
+        } finally {
+            allItems.push(item);
+            localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
+        } 
+
     }
+
+    fillWithTestData() {
+        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>budgetItems);
+    }
+
 }
 
 var budgetItems: BudgetItem[] = [
