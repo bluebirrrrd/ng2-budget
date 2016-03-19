@@ -7,7 +7,7 @@
         </tr>
     </tbody>
 </table>
-
+<p>Total: {{total}}</p>
 <form #f="ngForm" (ngSubmit)="addItem(model)">
     <input type="number" name="sum" required [(ngModel)]="model.sum"/>
     <input type="text" name="description" required [(ngModel)]="model.description"/>

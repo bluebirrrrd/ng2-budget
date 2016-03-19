@@ -15,12 +15,14 @@ import {BudgetService} from './services/budget.service';
     pipes: [ ],
     providers: [BudgetService],
     directives: [FORM_DIRECTIVES],
-    templateUrl: '/assets/templates/app.html'
+    templateUrl: '/assets/templates/app.html',
+    styles: [ ]
  })
  export class App implements OnInit {
 
     public budgetItems: BudgetItem[];
     public model: BudgetItem = new BudgetItem(0, "");
+    public total: number;
 
     constructor(private _budgetService: BudgetService) {
     }
@@ -31,6 +33,7 @@ import {BudgetService} from './services/budget.service';
 
     getItems() {
         this.budgetItems = this._budgetService.getItems();
+        this.countTotal();
     }
 
     addItem(model: BudgetItem) {
@@ -48,5 +51,9 @@ import {BudgetService} from './services/budget.service';
     fillWithTestData() {
         this._budgetService.fillWithTestData();
         this.getItems();
+    }
+
+    countTotal() {
+        this.total = this.budgetItems.map(_ => _.sum).reduce((a, b) => a + b);
     }
  }
