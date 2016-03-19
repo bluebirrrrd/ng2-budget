@@ -54,6 +54,6 @@ import {BudgetService} from './services/budget.service';
     }
 
     countTotal() {
-        this.total = this.budgetItems.map(_ => _.sum).reduce((a, b) => a + b);
+        this.total = this.budgetItems.map(_ => _.sum).reduce((a, b) => a + b, 0);
     }
  }
