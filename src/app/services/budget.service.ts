@@ -3,31 +3,32 @@ import {BudgetItem} from '../budget/budget-item';
 export class BudgetService {
     
     getItems() {
-
-        var budgetItems: BudgetItem[];
-
-        if (localStorage.budgetItems) {
-            budgetItems = JSON.parse(localStorage.budgetItems) || [];
-        } else {
-            budgetItems = [];
-        }
-
-        return budgetItems;
-    }
-
-
-    addItem(item: BudgetItem) {
-        
-        var allItems: BudgetItem[];
+        let allItems: BudgetItem[];
 
         try {
             allItems = localStorage.budgetItems ? JSON.parse(localStorage.budgetItems) : [];
         } catch(e) {
             allItems = [];
-        } finally {
-            allItems.push(item);
-            localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
-        } 
+        }
+
+        return allItems;
+    }
+
+
+    addItem(item: BudgetItem) {
+        let allItems: BudgetItem[] = this.getItems();
+        allItems.push(item);
+        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
+    }
+
+    sumUp() {
+        let allItems: BudgetItem[] = this.getItems();
+        let sum = allItems.map(_ => _.sum).reduce((a, b) => a + b);
+        let currentDate = new Date();
+        let sumItem: BudgetItem = new BudgetItem(sum, `Sum up(${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()})`);
+        allItems.length = 0;
+        allItems.push(sumItem);
+        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
 
     }
 
