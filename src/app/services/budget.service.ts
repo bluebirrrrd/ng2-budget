@@ -1,16 +1,19 @@
 import {BudgetItem} from '../budget/budget-item';
 
+// SystemJS loader currently doesn't work for npmed vertion of moment.js
+// import {moment} from 'moment/src/moment';
+let moment = require("moment");  // Workaround for that
+
+
 export class BudgetService {
     
     getItems() {
         let allItems: BudgetItem[];
-
         try {
             allItems = localStorage.budgetItems ? JSON.parse(localStorage.budgetItems) : [];
         } catch(e) {
             allItems = [];
         }
-
         return allItems;
     }
 
@@ -24,8 +27,8 @@ export class BudgetService {
     sumUp() {
         let allItems: BudgetItem[] = this.getItems();
         let sum = allItems.map(_ => _.sum).reduce((a, b) => a + b);
-        let currentDate = new Date();
-        let sumItem: BudgetItem = new BudgetItem(sum, `Sum up(${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()})`);
+        let now = moment();
+        let sumItem: BudgetItem = new BudgetItem(sum, `Sum up (${now.format('MMM D, YYYY')})`);
         allItems.length = 0;
         allItems.push(sumItem);
         localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
@@ -38,7 +41,7 @@ export class BudgetService {
 
 }
 
-var budgetItems: BudgetItem[] = [
+let budgetItems: BudgetItem[] = [
     {
         sum: 900,
         description: "Salary"
