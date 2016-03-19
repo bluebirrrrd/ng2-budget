@@ -1,0 +1,21 @@
+<table>
+    <th>Budget Table</th>
+    <tbody>
+        <tr *ngFor="#bi of budgetItems">
+            <td>{{ bi.sum }}</td>
+            <td>{{ bi.description }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<form #f="ngForm" (ngSubmit)="addItem(model)">
+    <input type="number" name="sum" required [(ngModel)]="model.sum"/>
+    <input type="text" name="description" required [(ngModel)]="model.description"/>
+    <button type="submit" [disabled]="!f.form.valid">Add</button>
+</form>
+
+<button (click)="sumUp()">Sum Up</button>
+
+<button (click)="fillWithTestData()">Fill With Test Data</button>
+
+{{model.sum}} {{model.description}}

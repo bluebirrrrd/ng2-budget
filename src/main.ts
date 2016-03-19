@@ -4,8 +4,6 @@
 import * as browser from 'angular2/platform/browser';
 import * as ngCore from 'angular2/core';
 import {
-  ROUTER_PROVIDERS,
-  ROUTER_DIRECTIVES,
   LocationStrategy,
   HashLocationStrategy
 } from 'angular2/router';
@@ -17,7 +15,6 @@ import {HTTP_PROVIDERS} from 'angular2/http';
  * our top level component that holds all of our components
  */
 import {App} from './app/app';
-import {RouterActive} from './app/directives/router-active';
 
 /*
  * Application Providers/Directives/Pipes
@@ -26,15 +23,12 @@ import {RouterActive} from './app/directives/router-active';
 // application_providers: providers that are global through out the application
 const APPLICATION_PROVIDERS = [
   ...HTTP_PROVIDERS,
-  ...ROUTER_PROVIDERS,
   ...FORM_PROVIDERS,
   ngCore.provide(LocationStrategy, { useClass: HashLocationStrategy })
 ];
 
 // application_directives: directives that are global through out the application
 const APPLICATION_DIRECTIVES = [
-  ...ROUTER_DIRECTIVES,
-  RouterActive
 ];
 
 // application_pipes: pipes that are global through out the application
