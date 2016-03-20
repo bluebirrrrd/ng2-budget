@@ -20,7 +20,7 @@ describe('App', () => {
   it('should have a model', inject([ App ], (app) => {
     let md = app.model;
     expect(md.sum).toEqual(0);
-    expect(md.description).toEqual("");
+    expect(md.description).toEqual('');
   }));
 
 });

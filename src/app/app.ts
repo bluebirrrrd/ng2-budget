@@ -21,7 +21,7 @@ import {BudgetService} from './services/budget.service';
  export class App implements OnInit {
 
     public budgetItems: BudgetItem[];
-    public model: BudgetItem = new BudgetItem(0, "");
+    public model: BudgetItem = new BudgetItem(0, '');
     public total: number;
 
     constructor(private _budgetService: BudgetService) {
@@ -37,8 +37,6 @@ import {BudgetService} from './services/budget.service';
     }
 
     addItem(model: BudgetItem) {
-        console.log("you just submitted:");
-        console.log(model);
         this._budgetService.addItem(model);
         this.getItems();
     }
