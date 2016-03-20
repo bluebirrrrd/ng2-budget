@@ -6,6 +6,8 @@ import {NgForm, FORM_DIRECTIVES} from 'angular2/common';
 
 import {BudgetItem} from './budget/budget-item';
 import {BudgetService} from './services/budget.service';
+import {countTotal} from './lib/utils';
+
 /*
  * App Component
  * Top Level Component
@@ -37,8 +39,11 @@ import {BudgetService} from './services/budget.service';
     }
 
     addItem(model: BudgetItem) {
+        if (!this.model.sum) return;
         this._budgetService.addItem(model);
         this.getItems();
+        this.model.sum = 0;
+        this.model.description = '';
     }
 
     sumUp() {
@@ -52,6 +57,6 @@ import {BudgetService} from './services/budget.service';
     }
 
     countTotal() {
-        this.total = this.budgetItems.map(_ => _.sum).reduce((a, b) => a + b, 0);
+        this.total = countTotal(this.budgetItems);
     }
  }

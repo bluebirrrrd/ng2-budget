@@ -1,4 +1,7 @@
 import {BudgetItem} from '../budget/budget-item';
+import {countTotal} from '../lib/utils';
+import {budgetItems} from '../budget/budget-items.mock';
+
 
 // SystemJS loader currently doesn't work for npmed vertion of moment.js
 // import {moment} from 'moment/src/moment';
@@ -25,14 +28,14 @@ export class BudgetService {
     }
 
     sumUp() {
-        let allItems: BudgetItem[] = this.getItems();
-        let sum = allItems.map(_ => _.sum).reduce((a, b) => a + b);
+        let allItems: BudgetItem[] = [];
         let now = moment();
-        let sumItem: BudgetItem = new BudgetItem(sum, `Sum up (${now.format('MMM D, YYYY')})`);
-        allItems.length = 0;
-        allItems.push(sumItem);
-        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
 
+        let sum = countTotal(this.getItems());
+        let sumItem: BudgetItem = new BudgetItem(sum, `Sum up (${now.format('MMM D, YYYY')})`);
+        allItems.push(sumItem);
+
+        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
     }
 
     fillWithTestData() {
@@ -41,29 +44,4 @@ export class BudgetService {
 
 }
 
-let budgetItems: BudgetItem[] = [
-    {
-        sum: 900,
-        description: "Salary"
-    },
-    {
-        sum: -150,
-        description: "BB-8 toy"
-    },
-    {
-        sum: -20,
-        description: "Groceries"
-    },
-    {
-        sum: -200,
-        description: "Emergency"
-    },
-    {
-        sum: -50,
-        description: "Superman toy"
-    },
-    {
-        sum: 80,
-        description: "Loan returned"
-    }
-]
+
