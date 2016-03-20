@@ -31,4 +31,13 @@ describe('App', () => {
     expect(sum).toEqual(560);
   });
 
+  it('should read from localStorage', inject([BudgetService], (service) => {
+    service.fillWithTestData();
+    let items = service.getItems();
+    for (let i = 0; i < budgetItems.length; i++) {
+      expect(items[i].sum).toEqual(budgetItems[i].sum);
+      expect(items[i].description).toEqual(budgetItems[i].description);
+    }
+  }));
+
 });
