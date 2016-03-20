@@ -46,7 +46,7 @@ describe('App', () => {
       return btn.click().then(() => {
         browser.driver.sleep(500);
         expect(numField.getAttribute('value')).toEqual('3.5');
-        expect(textField.getAttribute('value')).toEqual('negative test'); 
+        expect(textField.getAttribute('value')).toEqual('negative test');
       });
     }).then((p) => {
       return Promise.all([p, numField.clear(), textField.clear()]).then(() => {
