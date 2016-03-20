@@ -9,7 +9,7 @@ let moment = require("moment");  // Workaround for that
 
 
 export class BudgetService {
-    
+
     getItems() {
         let allItems: BudgetItem[];
         try {
@@ -19,7 +19,6 @@ export class BudgetService {
         }
         return allItems;
     }
-
 
     addItem(item: BudgetItem) {
         let allItems: BudgetItem[] = this.getItems();
