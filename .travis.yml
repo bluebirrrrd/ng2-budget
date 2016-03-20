@@ -16,11 +16,12 @@ sudo: true
 
 addons:
   apt:
-    - llvm-toolchain-precise-3.6
-    - ubuntu-toolchain-r-test
-  packages:
-    - clang-3.6
-    - g++-4.8
+    sources:
+      - llvm-toolchain-precise-3.6
+      -ubuntu-toolchain-r-test
+    packages:
+      - clang-3.6
+      - g++-4.8
 
 before_install:
   - sudo apt-get update
