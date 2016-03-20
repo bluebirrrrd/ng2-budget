@@ -7,7 +7,7 @@ describe('App', () => {
 
   it('should have a title', () => {
     let subject = browser.getTitle();
-    let result  = 'Angular2 Webpack Starter by @gdi2990 from @AngularClass';
+    let result  = 'Budget App by Anna Kurylo';
     expect(subject).toEqual(result);
   });
 
@@ -17,15 +17,15 @@ describe('App', () => {
     expect(subject).toEqual(result);
   });
 
-  it('should have <main>', () => {
-    let subject = element(by.css('app main')).isPresent();
+  it('should have <table>', () => {
+    let subject = element(by.css('app table')).isPresent();
     let result  = true;
     expect(subject).toEqual(result);
   });
 
-  it('should have <footer>', () => {
-    let subject = element(by.css('app footer')).getText();
-    let result  = 'WebPack Angular 2 Starter by @AngularClass';
+  it('should have table title', () => {
+    let subject = element(by.css('app table thead th')).getText();
+    let result  = 'Budget Table';
     expect(subject).toEqual(result);
   });
 
