@@ -4,8 +4,14 @@
 
 <table>
     <thead>
-        <th>Budget Table</th>
+        <th colspan="2">Budget Table</th>
     </thead>
+    
+    <tfoot>
+        <td>{{ total }}</td>
+        <td>Total</td>
+    </tfoot>
+    
     <tbody>
         <tr *ngFor="#bi of budgetItems">
             <td>{{ bi.sum }}</td>
@@ -13,15 +19,17 @@
         </tr>
     </tbody>
 </table>
-<p>Total: {{total}}</p>
+
 <form #f="ngForm" (ngSubmit)="addItem(model)">
-    <input type="number" name="sum" required [(ngModel)]="model.sum"/>
-    <input type="text" name="description" required [(ngModel)]="model.description"/>
+    <label>Sum:
+        <input type="number" name="sum" required [(ngModel)]="model.sum">
+    </label>
+    
+    <input type="text" name="description" required [(ngModel)]="model.description" placeholder="Enter puspose/source">
+    
     <button type="submit" [disabled]="!f.form.valid">Add</button>
 </form>
 
 <button (click)="sumUp()">Sum Up</button>
 
 <button (click)="fillWithTestData()">Fill With Test Data</button>
-
-{{model.sum}} {{model.description}}
