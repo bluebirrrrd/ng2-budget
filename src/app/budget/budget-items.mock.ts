@@ -3,26 +3,26 @@ import {BudgetItem} from './budget-item';
 export let budgetItems: BudgetItem[] = [
     {
         sum: 900,
-        description: "Salary"
+        description: 'Salary'
     },
     {
         sum: -150,
-        description: "BB-8 toy"
+        description: 'BB-8 toy'
     },
     {
         sum: -20,
-        description: "Groceries"
+        description: 'Groceries'
     },
     {
         sum: -200,
-        description: "Emergency"
+        description: 'Emergency'
     },
     {
         sum: -50,
-        description: "Superman toy"
+        description: 'Superman toy'
     },
     {
         sum: 80,
-        description: "Loan returned"
+        description: 'Loan returned'
     }
 ];

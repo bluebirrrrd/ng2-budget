@@ -29,7 +29,7 @@ describe('App', () => {
 });
 
 describe('utils', () => {
-  
+
   it('should count total', () => {
     let sum: number = countTotal(budgetItems);
     expect(sum).toEqual(560);

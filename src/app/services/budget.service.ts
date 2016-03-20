@@ -5,7 +5,7 @@ import {budgetItems} from '../budget/budget-items.mock';
 
 // SystemJS loader currently doesn't work for npmed vertion of moment.js
 // import {moment} from 'moment/src/moment';
-let moment = require("moment");  // Workaround for that
+let moment = require('moment');  // Workaround for that
 
 
 export class BudgetService {
@@ -14,7 +14,7 @@ export class BudgetService {
         let allItems: BudgetItem[];
         try {
             allItems = localStorage.budgetItems ? JSON.parse(localStorage.budgetItems) : [];
-        } catch(e) {
+        } catch (e) {
             allItems = [];
         }
         return allItems;
