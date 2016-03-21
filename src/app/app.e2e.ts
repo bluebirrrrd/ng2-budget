@@ -63,7 +63,7 @@ describe('App', () => {
           expect(numField.getAttribute('value')).toEqual('90');
           expect(textField.getAttribute('value')).toEqual('');
         });
-      })
+      });
   });
 
   it('should not add item with [invalid] zero sum', () => {
@@ -80,9 +80,9 @@ describe('App', () => {
             btn.click().then(() => {
               expect(numField.getAttribute('value')).toEqual('0');
               expect(textField.getAttribute('value')).toEqual('zero case');
-            })
-          })
-      })
+            });
+          });
+      });
   });
 
  it('should add item', () => {
