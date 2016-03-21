@@ -44,4 +44,6 @@ before_script:
 
 #Run tests
 script:
-  - npm run ci
+  # E2e tests are in progress, so temporary they should be skipped
+  # - npm run ci
+  - npm test
