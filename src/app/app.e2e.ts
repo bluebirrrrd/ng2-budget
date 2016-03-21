@@ -2,12 +2,14 @@ describe('App', () => {
 
   beforeEach(() => {
     browser.get('/');
+    browser.driver.sleep(500);
     browser.waitForAngular();
   });
 
   afterEach(() => {
     browser.driver.sleep(500);
     browser.executeScript('window.localStorage.clear()');
+    browser.driver.sleep(500);
   });
 
   it('should have a title', () => {
@@ -34,60 +36,77 @@ describe('App', () => {
     expect(subject).toEqual(result);
   });
 
-  it('should not add invalid item', () => {
+  it('should not add item with [invalid] float sum', () => {
     let numField = element(by.css('app form input[type=\'number\']'));
     let textField = element(by.css('app form input[type=\'text\']'));
     let btn = element(by.css('app form button[type=\'submit\']'));
 
-    Promise.all([numField.clear(), textField.clear()]).then(() => {
-      numField.sendKeys('3.5');
-      textField.sendKeys('negative test');
+    numField.clear().then(() => numField.sendKeys('3.5'));
+    textField.clear().then(() => textField.sendKeys('negative test'));
 
-      return btn.click().then(() => {
-        browser.driver.sleep(500);
-        expect(numField.getAttribute('value')).toEqual('3.5');
-        expect(textField.getAttribute('value')).toEqual('negative test');
-      });
-    }).then((p) => {
-      return Promise.all([p, numField.clear(), textField.clear()]).then(() => {
-        numField.sendKeys('90');
-        textField.sendKeys('');
-
-        return btn.click().then(() => {
-          browser.driver.sleep(500);
-          expect(numField.getAttribute('value')).toEqual('90');
-          expect(textField.getAttribute('value')).toEqual('');
-        });
-      });
-    }).then((p) => {
-      Promise.all([p, numField.clear(), textField.clear()]).then(() => {
-        numField.sendKeys('0');
-        textField.sendKeys('zero case');
-        return btn.click().then(() => {
-          browser.driver.sleep(500);
-          expect(numField.getAttribute('value')).toEqual('0');
-          expect(textField.getAttribute('value')).toEqual('zero case');
-        });
-      });
+    btn.click().then(() => {
+      expect(numField.getAttribute('value')).toEqual('3.5');
+      expect(textField.getAttribute('value')).toEqual('negative test');
     });
   });
 
- it('should add item', () => {
-    // browser.driver.sleep(2000);
-
+  it('should not add item with [invalid] empty description', () => {
     let numField = element(by.css('app form input[type=\'number\']'));
     let textField = element(by.css('app form input[type=\'text\']'));
     let btn = element(by.css('app form button[type=\'submit\']'));
 
-    Promise.all([numField.clear(), textField.clear()]).then( () => {
-      numField.sendKeys('-10');
-      textField.sendKeys('lunch');
+    numField.clear()
+      .then(() => numField.sendKeys('90'))
+      .then(() => {
+        browser.driver.sleep(500);
+        btn.click().then(() => {
+          expect(numField.getAttribute('value')).toEqual('90');
+          expect(textField.getAttribute('value')).toEqual('');
+        });
+      })
+  });
 
-      return btn.click().then( () => {
-        browser.driver.sleep(2000);
+  it('should not add item with [invalid] zero sum', () => {
+    let numField = element(by.css('app form input[type=\'number\']'));
+    let textField = element(by.css('app form input[type=\'text\']'));
+    let btn = element(by.css('app form button[type=\'submit\']'));
+
+    textField.clear()
+      .then(() => {
+        browser.driver.sleep(500);
+        textField.sendKeys('zero case')
+          .then(() => {
+            browser.driver.sleep(500);
+            btn.click().then(() => {
+              expect(numField.getAttribute('value')).toEqual('0');
+              expect(textField.getAttribute('value')).toEqual('zero case');
+            })
+          })
+      })
+  });
+
+ it('should add item', () => {
+    let numField = element(by.css('app form input[type=\'number\']'));
+    let textField = element(by.css('app form input[type=\'text\']'));
+    let btn = element(by.css('app form button[type=\'submit\']'));
+
+    Promise.all([
+      numField.clear().then(() => numField.sendKeys('-10')),
+      textField.clear().then(() => textField.sendKeys('lunch'))
+    ]).then(() => {
+      browser.driver.sleep(500);
+      btn.click().then( () => {
+        // Should become empty
         expect(numField.getAttribute('value')).toEqual('0');
         expect(textField.getAttribute('value')).toEqual('');
-        // element.all(by.css('app table tbody tr td')).then( _ => { console.log(_) });
+
+        // Should list item in table
+        let budgetRow = element.all(by.css('app table tbody tr td'));
+        expect(budgetRow.getText()).toEqual(['-10', 'lunch']);
+
+        // Should show correct total
+        let budgetTotal = element.all(by.css('app table tfoot tr td')).first();
+        expect(budgetTotal.getText()).toEqual('-10');
       });
     });
   });
