@@ -35,5 +35,4 @@ before_script:
 script:
 - npm test
 after_success:
-  - make build
   - make -e GH_REF=GH_REF GH_TOKEN=GH_TOKEN deploy 
