@@ -1,15 +1,15 @@
-clean:
-	rm -rf dist || exit 0
-
 dist:
 	npm run build:prod
 
+.PHONY: clean
+clean:
+	rm -rf dist || exit 0
+
+.PHONY: build
 build: dist
 
-rebuild: clean
-	make build
-
-deploy: rebuild
+.PHONY: deploy
+deploy: build
 	cd dist && \
 	git init && \
 	git config user.email "anna.kurilo21@gmail.com" && \
