@@ -2,6 +2,10 @@
 
 # Angular 2 Budget App
 
+See the app working [here](http://ng2-budget.bluebirrrrd.com/)
+
+To see the list of implemented features go to [issues](https://github.com/bluebirrrrd/ng2-budget/issues?q=is%3Aissue+is%3Aclosed)
+
 ## Getting Started
 
 First of all, clone the repo:
