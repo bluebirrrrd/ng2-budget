@@ -9,7 +9,7 @@ clean:
 build: dist
 
 .PHONY: deploy
-deploy: build
+deploy:
 	cd dist && \
 	git init && \
 	git config user.email "anna.kurilo21@gmail.com" && \
