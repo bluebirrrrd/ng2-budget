@@ -6,7 +6,8 @@ dist:
 
 build: dist
 
-rebuild: clean build
+rebuild: clean
+	make build
 
 deploy: rebuild
 	cd dist && \
