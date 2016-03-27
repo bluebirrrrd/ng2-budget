@@ -6,5 +6,5 @@ export function countTotal(items: BudgetItem[]): number {
 }
 
 export function getRandomId(): number {
-  return (new Date()).getTime()*Math.random();
+  return (new Date()).getTime() * Math.random();
 }

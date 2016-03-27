@@ -6,14 +6,15 @@ import {budgetItems} from '../budget/budget-items.mock';
 // SystemJS loader currently doesn't work for npmed vertion of moment.js
 // import {moment} from 'moment/src/moment';
 let moment = require('moment');  // Workaround for that
-
+const BUDGET_ITEMS_KEY = 'budgetItems';
 
 export class BudgetService {
 
     getItems() {
         let allItems: BudgetItem[];
         try {
-            allItems = localStorage.budgetItems ? JSON.parse(localStorage.budgetItems) : [];
+            const items = localStorage.getItem(BUDGET_ITEMS_KEY);
+            allItems = items ? JSON.parse(items) : [];
         } catch (e) {
             allItems = [];
         }
@@ -24,12 +25,12 @@ export class BudgetService {
         item.id = getRandomId();
         let allItems: BudgetItem[] = this.getItems();
         allItems.push(item);
-        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
+        localStorage.setItem(BUDGET_ITEMS_KEY, JSON.stringify(<Array<BudgetItem>>allItems));
     }
 
     deleteItem(item: BudgetItem) {
         let newItems: BudgetItem[] = this.getItems().filter(i => i.id !== item.id);
-        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>newItems);
+        localStorage.setItem(BUDGET_ITEMS_KEY, JSON.stringify(<Array<BudgetItem>>newItems));
     }
 
     sumUp() {
@@ -37,14 +38,15 @@ export class BudgetService {
         let now = moment();
 
         let sum = countTotal(this.getItems());
-        let sumItem: BudgetItem = new BudgetItem(sum, `Sum up (${now.format('MMM D, YYYY')})`);
+        let sumItem: BudgetItem = new BudgetItem(
+            getRandomId(), sum, `Sum up (${now.format('MMM D, YYYY')})`);
         allItems.push(sumItem);
 
-        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
+        localStorage.setItem(BUDGET_ITEMS_KEY, JSON.stringify(<Array<BudgetItem>>allItems));
     }
 
     fillWithTestData() {
-        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>budgetItems);
+        localStorage.setItem(BUDGET_ITEMS_KEY, JSON.stringify(<Array<BudgetItem>>budgetItems));
     }
 
 }
