@@ -1,35 +1,45 @@
-<header>
-    <h1>Super Duper Budget App!</h1>
-</header>
+<section class="app-wrapper">
+    <header>
+        <h1>Super Duper Budget App!</h1>
+    </header>
 
-<table>
-    <thead>
-        <th colspan="2">Budget Table</th>
-    </thead>
-    
-    <tfoot>
-        <td>{{ total }}</td>
-        <td>Total</td>
-    </tfoot>
-    
-    <tbody>
-        <tr *ngFor="#bi of budgetItems">
-            <td>{{ bi.sum }}</td>
-            <td>{{ bi.description }}</td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <caption>Budget Table</caption>
+        <thead>
+            <tr>
+                <th>Sum</th>
+                <th>Description/purpose</th>
+            </tr>
+        </thead>
 
-<form #f="ngForm" (ngSubmit)="addItem(model)">
-    <label>Sum:
-        <input type="number" name="sum" required [(ngModel)]="model.sum">
-    </label>
-    
-    <input type="text" name="description" required [(ngModel)]="model.description" placeholder="Enter puspose/source">
-    
-    <button type="submit" [disabled]="!f.form.valid">Add</button>
-</form>
+        <tfoot>
+            <tr>
+                <td>{{ total }}</td>
+                <td>Total</td>
+            </tr>
+        </tfoot>
 
-<button id="btn-sum" (click)="sumUp()">Sum Up</button>
+        <tbody>
+            <tr *ngFor="#bi of budgetItems"
+                [class.positive]="bi.sum > 0"
+                [class.negative]="bi.sum < 0">
+                <td>{{ bi.sum }}</td>
+                <td>{{ bi.description }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-<button id="btn-fill" (click)="fillWithTestData()">Fill With Test Data</button>
+    <form #f="ngForm" (ngSubmit)="addItem(model)">
+        <label>Amount:<br>
+            <input type="number" name="sum" required [(ngModel)]="model.sum">
+        </label>
+
+        <input type="text" name="description" required [(ngModel)]="model.description" placeholder="Enter puspose/source">
+
+        <button type="submit" [disabled]="!f.form.valid">Add</button>
+    </form>
+
+    <button id="btn-sum" (click)="sumUp()">Sum Up</button>
+
+    <button id="btn-fill" (click)="fillWithTestData()">Fill With Test Data</button>
+</section>

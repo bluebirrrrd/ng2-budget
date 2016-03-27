@@ -1,0 +1,56 @@
+$bg-color: #F1F8E9;
+$red-color: #E91E63;
+$green-color: #8BC34A;
+$border-color: #FAFAFA;
+$deep-blue: #0D47A1;
+$white-font-color: rgba(255, 255, 255, .95);
+$default-font: OpenSans;
+/* 
+:host {
+  background-color: $bg-color;
+} */
+
+.app-wrapper {
+  font-family: $default-font;
+  max-width: 50%;
+  margin: 0 auto;
+
+  header {
+    color: $deep-blue;
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      border-bottom: 2px solid $border-color;
+    }
+
+    tbody>tr {
+      border-bottom: 1px solid $border-color;
+      
+      &.positive {
+        background-color: $green-color;
+      }
+
+      &.negative {
+        background-color: $red-color;
+        color: white;
+      }
+
+      &:first-of-type {
+        border-top: 3px solid $deep-blue;
+      }
+
+
+    }
+
+    tfoot>tr>td {
+      border-top: 3px solid $deep-blue;
+    }
+
+  }
+
+}

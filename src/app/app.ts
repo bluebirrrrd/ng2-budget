@@ -18,7 +18,9 @@ import {countTotal} from './lib/utils';
     providers: [BudgetService],
     directives: [FORM_DIRECTIVES],
     templateUrl: '/assets/templates/app.html',
-    styles: [ ]
+    styles: [
+        require('./app.scss')
+    ]
  })
  export class App implements OnInit {
 
