@@ -29,6 +29,7 @@
         </tbody>
     </table>
     <section class="form-wrapper">
+        <section class="form-center-wrapper">
         <form #f="ngForm" (ngSubmit)="addItem(model)">
             <label>Amount:<br>
                 <input type="number" name="sum" required [(ngModel)]="model.sum">
@@ -39,8 +40,9 @@
             <button type="submit" [disabled]="!f.form.valid">+</button>
         </form>
 
-        <button id="btn-sum" (click)="sumUp()">Sum Up</button><br>
+        <button id="btn-sum" (click)="sumUp()">Sum Up</button>
 
         <button id="btn-fill" (click)="fillWithTestData()">Fill With Test Data</button>
+        </section>
     </section>
 </section>
