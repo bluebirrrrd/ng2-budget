@@ -6,7 +6,7 @@ import {NgForm, FORM_DIRECTIVES} from 'angular2/common';
 
 import {BudgetItem} from './budget/budget-item';
 import {BudgetService} from './services/budget.service';
-import {countTotal} from './lib/utils';
+import {countTotal, getRandomId} from './lib/utils';
 
 /*
  * App Component
@@ -25,13 +25,18 @@ import {countTotal} from './lib/utils';
  export class App implements OnInit {
 
     public budgetItems: BudgetItem[];
-    public model: BudgetItem = new BudgetItem(0, '');
+    public model: BudgetItem = new BudgetItem(null, 0, '');
     public total: number;
 
     constructor(private _budgetService: BudgetService) {
     }
 
     ngOnInit() {
+        this.getItems();
+    }
+
+    deleteItem(item: BudgetItem) {
+        this._budgetService.deleteItem(item);
         this.getItems();
     }
 
