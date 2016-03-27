@@ -65,6 +65,8 @@ module.exports = {
       // Support for CSS as raw text
       { test: /\.css$/,   loader: 'raw-loader' },
 
+      {test: /\.scss$/, exclude: /node_modules/, loader: 'raw-loader!sass-loader!postcss-loader'},
+
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] }
 

@@ -72,6 +72,12 @@ module.exports = {
         exclude: [
           helpers.root('node_modules/rxjs')
         ]
+      },
+      // @AngularPages: Browser autoprefix using PostCSS.
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: 'raw-loader!sass-loader!postcss-loader'
       }
     ],
     loaders: [
