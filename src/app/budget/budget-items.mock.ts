@@ -1,4 +1,5 @@
 import {BudgetItem} from './budget-item';
+import {getRandomId} from '../lib/utils';
 
 export let budgetItems: BudgetItem[] = [
     {
@@ -25,4 +26,5 @@ export let budgetItems: BudgetItem[] = [
         sum: 80,
         description: 'Loan returned'
     }
-];
+].map(item => new BudgetItem(getRandomId(), item.sum, item.description));
+

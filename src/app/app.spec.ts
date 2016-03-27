@@ -63,4 +63,14 @@ describe('BudgetService', () => {
     expect(resItem.description).toEqual(newItem.description);
   }));
 
+  it('should remove an item', inject([BudgetService], (service) => {
+    service.fillWithTestData();
+    let items: BudgetItem[] = service.getItems();
+    let item = items[0];
+    service.deleteItem(item);
+    items = service.getItems();
+    let result = items.every(i => i.id !== item.id);
+    expect(result).toEqual(true);
+  }));
+
 });

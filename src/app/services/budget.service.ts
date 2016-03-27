@@ -1,5 +1,5 @@
 import {BudgetItem} from '../budget/budget-item';
-import {countTotal} from '../lib/utils';
+import {countTotal, getRandomId} from '../lib/utils';
 import {budgetItems} from '../budget/budget-items.mock';
 
 
@@ -21,9 +21,15 @@ export class BudgetService {
     }
 
     addItem(item: BudgetItem) {
+        item.id = getRandomId();
         let allItems: BudgetItem[] = this.getItems();
         allItems.push(item);
         localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>allItems);
+    }
+
+    deleteItem(item: BudgetItem) {
+        let newItems: BudgetItem[] = this.getItems().filter(i => i.id !== item.id);
+        localStorage.budgetItems = JSON.stringify(<Array<BudgetItem>>newItems);
     }
 
     sumUp() {

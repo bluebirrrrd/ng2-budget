@@ -4,6 +4,7 @@
 */
 export class BudgetItem {
     constructor(
+    public id: number,
     public sum: number,
     public description: string
     ) { }
