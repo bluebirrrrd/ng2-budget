@@ -44,7 +44,8 @@ module.exports = {
       },
       { test: /\.json$/, loader: 'json-loader', exclude: [ helpers.root('src/index.html') ] },
       { test: /\.html$/, loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
-      { test: /\.css$/,  loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] }
+      { test: /\.css$/,  loader: 'raw-loader', exclude: [ helpers.root('src/index.html') ] },
+      { test: /\.scss$/, exclude: /node_modules/, loader: 'raw-loader!sass-loader!postcss-loader' }
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul
