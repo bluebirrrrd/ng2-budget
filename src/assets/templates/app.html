@@ -28,18 +28,19 @@
             </tr>
         </tbody>
     </table>
+    <section class="form-wrapper">
+        <form #f="ngForm" (ngSubmit)="addItem(model)">
+            <label>Amount:<br>
+                <input type="number" name="sum" required [(ngModel)]="model.sum">
+            </label>
 
-    <form #f="ngForm" (ngSubmit)="addItem(model)">
-        <label>Amount:<br>
-            <input type="number" name="sum" required [(ngModel)]="model.sum">
-        </label>
+            <input type="text" name="description" required [(ngModel)]="model.description" placeholder="Enter puspose/source">
 
-        <input type="text" name="description" required [(ngModel)]="model.description" placeholder="Enter puspose/source">
+            <button type="submit" [disabled]="!f.form.valid">+</button>
+        </form>
 
-        <button type="submit" [disabled]="!f.form.valid">Add</button>
-    </form>
+        <button id="btn-sum" (click)="sumUp()">Sum Up</button><br>
 
-    <button id="btn-sum" (click)="sumUp()">Sum Up</button>
-
-    <button id="btn-fill" (click)="fillWithTestData()">Fill With Test Data</button>
+        <button id="btn-fill" (click)="fillWithTestData()">Fill With Test Data</button>
+    </section>
 </section>

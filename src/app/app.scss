@@ -1,8 +1,10 @@
-$bg-color: #F1F8E9;
-$red-color: #E91E63;
-$green-color: #8BC34A;
-$border-color: #FAFAFA;
-$deep-blue: #0D47A1;
+$bg-color: rgba(241, 248, 233, 1);
+$red-color: rgba(233, 30, 99, 1);
+$green-color: rgba(139, 195, 74, 1);
+$grey-color: rgba(189, 189, 189, 1);
+$border-color: rgba(250, 250, 250, 1);
+$blue-color: rgba(68, 138, 255, 1);
+$deep-blue-color: rgba(13, 71, 161, 1);
 $white-font-color: rgba(255, 255, 255, .95);
 $default-font: OpenSans;
 /* 
@@ -16,7 +18,7 @@ $default-font: OpenSans;
   margin: 0 auto;
 
   header {
-    color: $deep-blue;
+    color: $deep-blue-color;
     text-align: center;
   }
 
@@ -30,6 +32,7 @@ $default-font: OpenSans;
 
     tbody>tr {
       border-bottom: 1px solid $border-color;
+      cursor: default;
       
       &.positive {
         background-color: $green-color;
@@ -41,16 +44,106 @@ $default-font: OpenSans;
       }
 
       &:first-of-type {
-        border-top: 3px solid $deep-blue;
+        border-top: 3px solid $deep-blue-color;
       }
-
 
     }
 
     tfoot>tr>td {
-      border-top: 3px solid $deep-blue;
+      border-top: 3px solid $deep-blue-color;
     }
 
   }
+
+  .form-wrapper {
+
+    form {
+      display: inline;
+      input {
+        border: 0;
+        border-bottom: 1px solid $grey-color;
+        font-size: 1.9vh;
+        height: 4vh;
+        line-height: 4vh;
+        padding-bottom: 2px;
+        transition: border-bottom 0.1s linear;
+        transition: padding-bottom 0.1s linear;
+
+        &:focus {
+          border-bottom: 2px solid $deep-blue-color;
+          outline: 0;
+          padding-bottom: 1px;
+        }
+
+      }
+
+      button[type="submit"] {
+        width: 5vh;
+        height: 0;
+        background-color: $red-color;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 2px 3px 1px $grey-color;
+        color: $white-font-color;
+        font-size: 1.1em;
+        font-weight: 500;
+        line-height: 4.5vh;
+        padding-bottom: 5vh;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.1s ease;
+
+        &:hover {
+          background-color: transparentize($red-color, 0.1);
+        }
+
+        &:active {
+          background-color: rgba(216, 27, 96, 1);
+          box-shadow: 0 2px 1px 1px $grey-color;
+          top: 3px;
+        }
+      }
+
+      label {
+        font-size: 1.8vh;
+      }
+    }
+
+    #btn-sum {
+      width: 15%;
+      height: 8%;
+      background-color: $blue-color;
+      box-shadow: 0 2px 3px 1px $grey-color;
+      border: 0;
+      border-radius: 5px;
+      color: $white-font-color;
+      font-size: 1em;
+      font-weight: 500;
+      margin-top: 10px;
+      outline: 0;
+      position: relative;
+      transition: all 0.1s ease;
+
+      &:hover {
+        background-color: transparentize($blue-color, 0.1);
+      }
+
+      &:active {
+        background-color: transparentize($deep-blue-color, 0.3);
+        top: 3px;
+      }
+    }
+
+    #btn-fill {
+      @extend #btn-sum;
+      background-color: $grey-color;
+
+      &:hover {
+        background-color: transparentize($grey-color, 0.1);
+      }
+    }
+  }
+
 
 }
