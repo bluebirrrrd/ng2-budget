@@ -27,10 +27,6 @@ $default-font: OpenSans;
     width: 100%;
     border-collapse: collapse;
 
-    thead {
-      border-bottom: 2px solid $border-color;
-    }
-
     tbody {
 
       tr {
@@ -67,6 +63,10 @@ $default-font: OpenSans;
             outline: 0;
             padding-bottom: 1px;
           }
+        }
+        
+        td:first-of-type {
+          max-width: 50px;
         }
 
         td:last-of-type {

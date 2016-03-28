@@ -24,7 +24,7 @@
                 <td>
                     <input type="number" [(ngModel)]="minSum" placeholder="Min sum">
                 </td>
-                <td></td>
+                <td colspan="2"></td>
             </tr>
             <tr *ngFor="#bi of (budgetItems | sumFilter :minSum)"
                 [class.positive]="bi.sum > 0"
