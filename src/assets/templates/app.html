@@ -20,7 +20,12 @@
         </tfoot>
 
         <tbody>
-            <tr><input type="number" [(ngModel)]="minSum" placeholder="Min sum"></tr>
+            <tr>
+                <td>
+                    <input type="number" [(ngModel)]="minSum" placeholder="Min sum">
+                </td>
+                <td></td>
+            </tr>
             <tr *ngFor="#bi of (budgetItems | sumFilter :minSum)"
                 [class.positive]="bi.sum > 0"
                 [class.negative]="bi.sum < 0">
