@@ -1,0 +1,55 @@
+<section class="app-wrapper">
+    <header>
+        <h1>Super Duper Budget App!</h1>
+    </header>
+
+    <table>
+        <caption>Budget Table</caption>
+        <thead>
+            <tr>
+                <th>Sum</th>
+                <th colspan="2">Description/purpose</th>
+            </tr>
+        </thead>
+
+        <tfoot>
+            <tr>
+                <td>{{ total }}</td>
+                <td colspan="2">Total</td>
+            </tr>
+        </tfoot>
+
+        <tbody>
+            <tr>
+                <td>
+                    <input type="number" [(ngModel)]="minSum" placeholder="Min sum">
+                </td>
+                <td colspan="2"></td>
+            </tr>
+            <tr *ngFor="#bi of (budgetItems | sumFilter :minSum)"
+                [class.positive]="bi.sum > 0"
+                [class.negative]="bi.sum < 0">
+                <td>{{ bi.sum }}</td>
+                <td>{{ bi.description }}</td>
+                <td><button (click)="deleteItem(bi)">&#9760;</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <section class="form-wrapper">
+        <section class="form-center-wrapper">
+        <form #f="ngForm" (ngSubmit)="addItem(model)">
+            <label>Amount:<br>
+                <input type="number" name="sum" required [(ngModel)]="model.sum">
+            </label>
+
+            <input type="text" name="description" required [(ngModel)]="model.description" placeholder="Enter puspose/source">
+
+            <button type="submit" [disabled]="!f.form.valid">+</button>
+        </form>
+
+        <button id="btn-sum" (click)="sumUp()">Sum Up</button>
+
+        <button id="btn-fill" (click)="fillWithTestData()">Fill With Test Data</button>
+        </section>
+    </section>
+</section>
