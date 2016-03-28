@@ -6,6 +6,7 @@ import {NgForm, FORM_DIRECTIVES} from 'angular2/common';
 
 import {BudgetItem} from './budget/budget-item';
 import {BudgetService} from './services/budget.service';
+import {SumFilterPipe} from './pipes/sum-filter.pipe';
 import {countTotal, getRandomId} from './lib/utils';
 
 /*
@@ -14,7 +15,7 @@ import {countTotal, getRandomId} from './lib/utils';
  */
  @Component({
     selector: 'app',
-    pipes: [ ],
+    pipes: [ SumFilterPipe ],
     providers: [BudgetService],
     directives: [FORM_DIRECTIVES],
     templateUrl: '/assets/templates/app.html',
@@ -27,6 +28,7 @@ import {countTotal, getRandomId} from './lib/utils';
     public budgetItems: BudgetItem[];
     public model: BudgetItem = new BudgetItem(null, 0, '');
     public total: number;
+    public minSum: number;
 
     constructor(private _budgetService: BudgetService) {
     }

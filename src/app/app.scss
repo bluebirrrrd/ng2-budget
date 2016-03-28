@@ -34,6 +34,7 @@ $default-font: OpenSans;
     tbody {
 
       tr {
+
         border-bottom: 1px solid $border-color;
         cursor: default;
 
@@ -48,6 +49,24 @@ $default-font: OpenSans;
 
         &:first-of-type {
           border-top: 3px solid $deep-blue-color;
+        }
+
+        input {
+          border: 0;
+          border-bottom: 1px solid $grey-color;
+          font-size: 1.9vh;
+          height: 4vh;
+          line-height: 4vh;
+          /* padding-bottom: 1px; */
+          transition: border-bottom 0.1s linear;
+          transition: padding-bottom 0.1s linear;
+          width: 100%;
+
+          &:focus {
+            border-bottom: 1px solid $deep-blue-color;
+            outline: 0;
+            padding-bottom: 1px;
+          }
         }
 
         td:last-of-type {
